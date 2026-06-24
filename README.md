@@ -1,7 +1,5 @@
 # WE-clipper
 
-[![License: MIT](https://shields.io)](https://opensource.org)
-
 This is a simple web browser extension for clipping web page text
 to a WikiEducator user subpage. It simplifies creating a public
 bookmark list.
@@ -11,8 +9,8 @@ bookmark list.
 ## Features
 
 - appends page title, link, and text to the user subpage of your choice
-- text can be selected in the browser, or fallsback to the first paragraph
-- uses a custom template for each subpage, allowing formatting
+- text can be selected in the browser, or falls back to the first paragraph
+- uses a custom template for each subpage for rendering flexibility
 
 ![Project Screenshot](images/screenshot.png)
 
