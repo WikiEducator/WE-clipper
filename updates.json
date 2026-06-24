@@ -1,0 +1,12 @@
+{
+  "addons": {
+    "WE-clipper@wikieducator.org": {
+      "updates": [
+        {
+          "version": "0.9.9",
+          "update_link": "https://github.com/WikiEducator/WE-clipper/releases/download/v0.9.9/WE-clipper-v0.9.9.xpi"
+        }
+      ]
+    }
+  }
+}

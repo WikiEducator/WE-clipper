@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Solid WikiEducator Blue Background Base -->
+  <rect width="128" height="128" rx="28" fill="#3366cc"/>
+  
+  <!-- The WikiEducator "WE" Initials in the Background -->
+  <g fill="#ffffff" opacity="0.9">
+    <!-- Letter 'W' (Left Side) -->
+    <path d="M 15 34 L 31 94 L 43 54 L 49 54 L 61 94 L 77 34 H 65 L 55 76 L 46 34 H 36 L 27 76 L 17 34 Z"/>
+    <!-- Letter 'E' (Right Side) -->
+    <path d="M 80 34 V 94 H 112 V 80 H 94 V 71 H 108 V 57 H 94 V 48 H 112 V 34 Z"/>
+  </g>
+  
+  <!-- High-Contrast Scissors cutting from Bottom-Left to Top-Right -->
+  <g transform="rotate(35, 64, 64)">
+    <!-- BOTTOM / BACK END: Distinct Finger Loops -->
+    <!-- Loop 1 (Left handle) -->
+    <circle cx="22" cy="52" r="14" fill="none" stroke="#ffffff" stroke-width="6"/>
+    <!-- Loop 2 (Right handle) -->
+    <circle cx="22" cy="76" r="14" fill="none" stroke="#ffffff" stroke-width="6"/>
+
+    <!-- MIDDLE: Pivot Junction Area -->
+    <path d="M 34 52 L 46 64 L 34 76 Z" fill="#ffffff"/>
+    <circle cx="42" cy="64" r="3.5" fill="#3366cc"/>
+    
+    <!-- TOP / FRONT END: Open Blades pointing forward and flaring outward to the right -->
+    <!-- Upper Blade (Flaring up-right) -->
+    <path d="M 44 61 L 104 46 L 50 64 Z" fill="#ffffff" stroke="#3366cc" stroke-width="1.5"/>
+    <!-- Lower Blade (Flaring down-right) -->
+    <path d="M 44 67 L 104 82 L 50 64 Z" fill="#eeeeee" stroke="#3366cc" stroke-width="1.5"/>
+  </g>
+</svg>
+

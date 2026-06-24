@@ -1,0 +1,19 @@
+# IDEs and Code Editors
+*~
+*.swp
+
+# Operating System noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build outputs and distribution zip files
+/dist/
+/build/
+*.zip
+*.crx
+*.xpi
+
+# Local environment / Secrets
+.env
+
