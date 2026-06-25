@@ -3,8 +3,8 @@
     "WE-clipper@wikieducator.org": {
       "updates": [
         {
-          "version": "0.9.11",
-          "update_link": "https://github.com/WikiEducator/WE-clipper/releases/download/v0.9.11/WE-clipper-v0.9.11.xpi"
+          "version": "1.0.0",
+          "update_link": "https://github.com/WikiEducator/WE-clipper/releases/download/v1.0.0/WE-clipper-v1.0.0.xpi"
         }
       ]
     }
