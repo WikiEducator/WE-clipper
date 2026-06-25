@@ -2,6 +2,24 @@ const WIKI_API = 'https://wikieducator.org/api.php';
 let pageContext = { title: '', url: '' };
 let currentUsername = '';
 
+// escape characters that could break template structure in mediawiki
+function escapeWikitext(text) {
+  if (!text) return '';
+  return text
+    .replace(/\|/g, '{{!}}')
+    .replace(/\{/g, '&#123;')
+    .replace(/\}/g, '&#125;');
+}
+
+// sanitize subpage name to prevent invalid mediawiki title errors
+function sanitizeSubpage(name) {
+  return name
+    .replace(/[#<>[\]|{}]/g, '') // strip forbidden title characters
+    .replace(/^\/+|\/+$/g, '')    // strip leading and trailing slashes
+    .replace(/\/+/g, '/')        // convert multiple consecutive slashes to a single slash
+    .trim();
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const statusDiv = document.getElementById('status');
   const clipBtn = document.getElementById('clipBtn');
@@ -77,6 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const { title, url, summary } = results[0].result;
       pageContext.title = title;
       pageContext.url = url;
+      document.getElementById('title').value = title;
       document.getElementById('description').value = summary;
     }
   });
@@ -85,19 +104,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.getElementById('clipBtn').addEventListener('click', async () => {
   const statusDiv = document.getElementById('status');
   const clipBtn = document.getElementById('clipBtn');
-  const subpage = document.getElementById('targetPage').value.trim();
+  const subpage = sanitizeSubpage(document.getElementById('targetPage').value);
   const userDescription = document.getElementById('description').value.trim();
   
   if (!subpage) return;
   statusDiv.textContent = 'Sending to WikiEducator...';
   clipBtn.disabled = true; // Prevent quick multi-clicks during active request
 
-  const finalTitle = pageContext.title || "Unknown Title";
+  const finalTitle = escapeWikitext(document.getElementById('title').value.trim() || pageContext.title || "Unknown Title");
   const finalUrl = pageContext.url || "";
   const fullTargetPage = `User:${currentUsername}/${subpage}`;
   const localISO = new Date().toLocaleDateString('en-CA');
+  const escapedDescription = escapeWikitext(userDescription);
 
-  const wikitext = `\n{{/Template\n|url=${finalUrl}\n|title=${finalTitle}\n|summary=${userDescription}\n|date=${localISO}}}\n`;
+  const wikitext = `\n{{/Template\n|url=${finalUrl}\n|title=${finalTitle}\n|summary=${escapedDescription}\n|date=${localISO}}}\n`;
 
   try {
     const tokenRes = await fetch(`${WIKI_API}?action=tokens&type=edit&format=json`, { credentials: 'include' });
@@ -128,8 +148,7 @@ document.getElementById('clipBtn').addEventListener('click', async () => {
 
     if (editData.edit && editData.edit.result === 'Success') {
       statusDiv.textContent = 'Successfully clipped!';
-      // Retain the disabled state on the button so they don't clip twice,
-      // but keep the popup window open for 1.5 seconds so they see success.
+      // Retain the disabled state on the button so they don't clip twice
       setTimeout(() => window.close(), 1500);
     } else {
       statusDiv.textContent = 'Wiki Error: ' + JSON.stringify(editData.error || editData);
@@ -140,3 +159,4 @@ document.getElementById('clipBtn').addEventListener('click', async () => {
     clipBtn.disabled = false;
   }
 });
+

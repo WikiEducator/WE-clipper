@@ -12,6 +12,15 @@ if ! command -v jq &>/dev/null; then
   exit 1
 fi
 
+# optional syntax check if bun is available
+if command -v bun &>/dev/null; then
+  echo "Checking JavaScript syntax with Bun..."
+  if ! bun build "$SCRIPT_DIR/src/popup.js" >/dev/null; then
+    echo "Error: JavaScript syntax check failed."
+    exit 1
+  fi
+fi
+
 VERSION=$(jq -r '.version' "$MANIFEST")
 # handles Firefox ID locations whether it is at the root level, inside applications, or browser_specific_settings
 EXTENSION_ID=$(jq -r '.id // .browser_specific_settings.gecko.id // .applications.gecko.id // empty' "$MANIFEST")
